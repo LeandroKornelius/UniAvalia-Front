@@ -17,7 +17,9 @@ export default function About() {
                 <meta name="description" content={metadata.description} />
                 <link rel="icon" href="/iconLogo.svg" sizes="any" />
             </Head>
-            <NavBar/>
+            <main className="h-screen bg-light-white">
+                <NavBar/>
+            </main>
         </>
     )
 }
