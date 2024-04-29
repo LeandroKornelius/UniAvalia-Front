@@ -19,7 +19,7 @@ export default function About() {
             </Head>
             <main className="h-screen bg-light-white">
                 <div className="space-y-6">
-                    <NavBar/>
+                    <NavBar selectedPageText={"About"}/>
                     <div className="grid justify-items-center space-y-8">
                         <div className="grid justify-items-center">
                             <h1 className="text-light-blue text-5xl font-semibold">Ajude seus colegas</h1>
