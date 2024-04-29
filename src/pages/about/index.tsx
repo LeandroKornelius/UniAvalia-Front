@@ -3,8 +3,8 @@ import { HeadMetaType } from "@/types/headMetaType";
 import Head from "next/head";
 
 export const metadata: HeadMetaType = {
-  title: "UniAvalia",
-  description: "A teacher rating system to help students pick classes.",
+  title: "About Uniavalia",
+  description: "Learn more about UniAvalia - a teacher rating system dedicated to helping students choose their classes wisely.",
 };
 
 
