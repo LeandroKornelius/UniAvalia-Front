@@ -1,4 +1,3 @@
-import React from 'react';
 
 export default function RegularInput({ required, inputType, inputPlaceholder, iconPath, iconAlt }: { required: boolean, inputType: string, inputPlaceholder: string, iconPath: string, iconAlt: string }) {
     return (
