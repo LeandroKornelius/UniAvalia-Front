@@ -21,6 +21,9 @@ const config: Config = {
         'orange': '#FCBD4C',
         'green': '#1DDF8C',
       },
+      fontFamily: {
+        fira: ['var(--font-fira-mono)']
+      }
     },
   },
   plugins: [],
