@@ -37,8 +37,8 @@ export default function Login() {
                                 iconAlt="email icon"
                             />
                             <a className="text-sm text-light-blue underline underline-offset-2">Forgot your password?</a>
-                            <h3 className="text-sm text-light-blue">Don't have an account? <a className="text-sm text-light-blue underline underline-offset-2">Create one!</a></h3>
-                            <Button btnText={"Log In"}/>
+                            <h3 className="text-sm text-light-blue">Dont have an account? <a className="text-sm text-light-blue underline underline-offset-2">Create one!</a></h3>
+                            <Button buttonText={"Log In"}/>
                         </div>
                         <div className="grid justify-items-center w-1/2 h-7/10 bg-light-blue">
                             <h1>Teste</h1>
