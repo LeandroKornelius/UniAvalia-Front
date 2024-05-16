@@ -40,15 +40,16 @@ export default function About() {
             <main className={`${fira_mono.variable}`}>
                 <NavBar 
                     selectedPageText={"About"}
-                    buttonText={"Login"}
+                    buttonText={"Entrar"}
                     handleButtonClick={handleClickLogin}
+                    buttonWidth={"170"}
                 />
-                <div className="h-screen w-screen grid gap-28 lg:gap-2 content-between p-6">
-                    <div className="grid justify-items-center space-y-4 md:space-y-12">
+                <div className="h-screen w-screen grid content-between p-6 lg:px-24 lg:py-0">
+                    <div className="grid justify-items-center space-y-4 md:space-y-10">
                         <Image 
                             src="/greenLogoText.svg"
                             alt="Uniavalia Logo with text"
-                            className="lg:collapse"
+                            className="flex lg:hidden"
                             width={72}
                             height={72}
                         />
@@ -57,13 +58,13 @@ export default function About() {
                         <Image
                             src="/aboutImage.svg"
                             alt="Uniavalia System description image"
-                            className="collapse lg:visible"
-                            width={500}
-                            height={500}
+                            className="hidden md:flex"
+                            width={400}
+                            height={400}
                         />
                     </div>
-                    <div className="grid justify-items-center space-y-2 lg:collapse"> 
-                        <Button buttonText={'Login'} handleButtonClick={handleClickLogin} buttonWidth="w-52 md:w-64" buttonHeight="h-7 md:h-9"/>
+                    <div className="grid justify-items-center space-y-2 flex lg:hidden"> 
+                        <Button buttonText={'Entrar'} handleButtonClick={handleClickLogin} buttonWidth="w-52 md:w-96" buttonHeight="h-7 md:h-9"/>
                         <h3 className="font-fira text-sm md:text-base">Não tem uma conta? <a className="cursor-pointer underline underline-offset-2" onClick={handleClickCreate}>Crie uma</a></h3>
                     </div>
                 </div>

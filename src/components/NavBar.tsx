@@ -5,7 +5,7 @@ import NavOptions from "./NavOptions";
 export default function NavBar({selectedPageText, buttonText, handleButtonClick, buttonWidth, buttonHeight }: {selectedPageText: string, buttonText: string, handleButtonClick?: () => void, buttonWidth?: string, buttonHeight?: string}) {
 
     return (
-        <div className="px-32 py-4 flex items-center justify-between collapse lg:visible">
+        <div className="px-32 py-2 flex items-center justify-between hidden lg:flex">
             <Image 
                 src="/greenLogo.svg"
                 alt="Uniavalia Logo"
