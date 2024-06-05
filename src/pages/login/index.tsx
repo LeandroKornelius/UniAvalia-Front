@@ -1,51 +1,109 @@
 import Button from "@/components/Button";
 import NavBar from "@/components/NavBar";
-import RegularInput from "@/components/RegularInput";
 import { HeadMetaType } from "@/types/headMetaType";
+import { Field, Form, Formik } from "formik";
+import { TextField } from 'formik-mui';
+import { Fira_Mono } from "next/font/google";
 import Head from "next/head";
+import Image from "next/image";
+import * as Yup from 'yup';
+
 
 export const metadata: HeadMetaType = {
-    title: "Login to Uniavalia",
+    title: "Login",
     description: "Sign in to UniAvalia and access your account. Join a community dedicated to helping students make informed class selections.",
   };
 
+  const fira_mono = Fira_Mono({
+    subsets: ["latin"],
+    display: "swap",
+    variable: "--font-fira-mono",
+    weight: "400",
+  });
+
+  interface LoginFormValues {
+    email: string;
+    password: string;
+  }
+
+  const schema = Yup.object().shape({
+    email: Yup.string().email('Invalid email format').required('Required'),
+    password: Yup.string().required('Required'),
+  });
+
 export default function Login() {
+    const initialValues: LoginFormValues = {
+      email: '',
+      password: ''
+    }
+
+    const handleClickLogin = () => {
+        
+    };
+    
 
     return (
         <>
             <Head>
                 <title>{metadata.title}</title>
                 <meta name="description" content={metadata.description} />
-                <link rel="icon" href="/iconLogo.svg" sizes="any" />
+                <link rel="icon" href="/greenLogo.svg" sizes="any" />
             </Head>
-            <main className="h-screen bg-light-white">
-                <NavBar 
+            <main className={`${fira_mono.variable}`}>
+                <NavBar
                     selectedPageText={""}
-                    buttonText={"Login"}
+                    buttonText={"Cadastrar"}
+                    buttonWidth={"170"}
                 />
-                <div className="flex justify-center">
-                    <div className="flex justify-between w-4/6 h-7/10 bg-light-gray">
-                        <div className="grid justify-items-center w-1/2 h-7/10">
-                            <h1 className="text-light-blue text-3xl font-bold">Login to your Account</h1>
-                            <h2 className="text-light-blue text-base font-semibold">Welcome back! How would you like to login?</h2>
-                            <button className="px-10 py-1 border border-solid border-light-blue rounded-xl"><img src="/google.svg" alt="Google"></img></button>
-                            <h3 className="text-sm text-light-blue">or continue with email</h3>
-                            <RegularInput
-                                required={true}
-                                inputType="email"
-                                inputPlaceholder="Enter your email"
-                                iconPath="/email.svg"
-                                iconAlt="email icon"
-                            />
-                            <a className="text-sm text-light-blue underline underline-offset-2">Forgot your password?</a>
-                            <h3 className="text-sm text-light-blue">Dont have an account? <a className="text-sm text-light-blue underline underline-offset-2">Create one!</a></h3>
-                            <Button buttonText={"Log In"}/>
-                        </div>
-                        <div className="grid justify-items-center w-1/2 h-7/10 bg-light-blue">
-                            <h1>Teste</h1>
-                        </div>
-                    </div>
-                </div>
+                <div className="h-screen w-screen grid content-between lg:h-full p-6 lg:px-24 lg:py-0">
+          <div className="grid justify-items-center space-y-6 md:space-y-10">
+            <Image
+              src="/greenLogoText.svg"
+              alt="Uniavalia Logo with text"
+              className="flex lg:hidden"
+              width={72}
+              height={72}
+            />
+            <h1 className="font-fira text-center text-2xl md:text-3xl font-extrabold">
+              Bem-vindo de volta!
+            </h1>
+            <h2 className="font-fira font-bold text-center text-base md:text-xl">
+              Como você gostaria de realizar o seu login?
+            </h2>
+
+            <Formik
+              initialValues={initialValues}
+              onSubmit={handleClickLogin}
+            >
+              <Form>
+                <Field
+                  component={TextField}
+                  label="Email"
+                  name="email"
+                  type="email"
+                  variant="outlined"
+                  size="small"
+                />
+                <Field
+                  component={TextField}
+                  label="Password"
+                  name="password"
+                  type="password"
+                  className=""
+                />
+                <Button 
+                  buttonText="Login"
+                  handleButtonClick={handleClickLogin}
+                  buttonWidth="w-52 md:w-96 lg:w-320"
+                  buttonHeight="h-7 md:h-9"
+                />
+              </Form>
+
+            </Formik>
+            
+            
+          </div>
+        </div>
             </main>
         </>
     )
