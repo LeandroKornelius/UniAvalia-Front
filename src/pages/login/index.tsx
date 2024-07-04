@@ -1,8 +1,8 @@
 import Button from "@/components/Button";
 import NavBar from "@/components/NavBar";
 import { HeadMetaType } from "@/types/headMetaType";
-import { TextField } from "@mui/material";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Divider, TextField } from "@mui/material";
+import { Field, Form, Formik } from "formik";
 import { Fira_Mono } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
@@ -89,7 +89,7 @@ export default function Login() {
                     fullWidth
                     margin="normal"
                   />
-                  <ErrorMessage name="email" component="div" className="text-red-500" />
+                  {/* <ErrorMessage name="email" component="div" className="text-red-500" /> */}
                   <Field 
                     name="password"
                     as={TextField}
@@ -99,28 +99,30 @@ export default function Login() {
                     fullWidth
                     margin="normal"
                   />
-                  <ErrorMessage name="password" component="div" className="text-red-500" />
-                  <a className="font-fira underline justify-self-end text-xs">Forgot Password?</a>
+                  {/* <ErrorMessage name="password" component="div" className="text-red-500" /> */}
+                  <a className="cursor-pointer font-fira underline justify-self-end text-xs mb-5">Forgot Password?</a>
                   <Button 
                     handleButtonClick={handleSubmit}
                     buttonText="Login"
                     buttonWidth="w-full"
                     buttonHeight="h-7 md:h-9"
                   />
-                  <p className="font-fira text-xs">Don&apos;t have an account? <a className="font-fira underline text-xs">Create one</a></p>
-                  <p className="font-fira text-xs">Or continue with</p>
-                  <div className="grid justify-items-center content-center w-32 h-9 border-2 border-black border-solid rounded-md">
-                    <Image
-                      src="/gIcon.svg"
-                      alt="Google icon"
-                      className="flex lg:hidden"
-                      width={24}
-                      height={24}
-                    />
-                  </div>
-                </Form>
+                  </Form>
               )}
             </Formik>
+                  <div className="grid justify-items-center w-64 space-y-7 ">
+                    <p className="font-fira text-xs">Don&apos;t have an account? <a className="cursor-pointer font-fira underline text-xs">Create one</a></p>
+                    <Divider className="w-full text-xs">or continue with</Divider>
+                    <div className="cursor-pointer grid justify-items-center content-center w-32 h-9 border-2 border-black border-solid rounded-md">
+                      <Image
+                        src="/gIcon.svg"
+                        alt="Google icon"
+                        className="flex lg:hidden"
+                        width={24}
+                        height={24}
+                      />
+                    </div>
+                  </div>
           </div>
         </div>
             </main>
