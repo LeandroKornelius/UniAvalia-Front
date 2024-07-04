@@ -1,8 +1,8 @@
 import Button from "@/components/Button";
 import NavBar from "@/components/NavBar";
 import { HeadMetaType } from "@/types/headMetaType";
-import { Field, Form, Formik } from "formik";
-import { TextField } from 'formik-mui';
+import { TextField } from "@mui/material";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Fira_Mono } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
@@ -27,8 +27,11 @@ export const metadata: HeadMetaType = {
   }
 
   const schema = Yup.object().shape({
-    email: Yup.string().email('Invalid email format').required('Required'),
-    password: Yup.string().required('Required'),
+    email: Yup.string()
+      .email('Invalid email format')
+      .required('Required'),
+    password: Yup.string()
+      .required('Required'),
   });
 
 export default function Login() {
@@ -36,12 +39,7 @@ export default function Login() {
       email: '',
       password: ''
     }
-
-    const handleClickLogin = () => {
-        
-    };
     
-
     return (
         <>
             <Head>
@@ -73,35 +71,56 @@ export default function Login() {
 
             <Formik
               initialValues={initialValues}
-              onSubmit={handleClickLogin}
+              validationSchema={schema}
+              onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2));
+                  setSubmitting(false);
+                }, 400);
+              }}
             >
-              <Form>
-                <Field
-                  component={TextField}
-                  label="Email"
-                  name="email"
-                  type="email"
-                  variant="outlined"
-                  size="small"
-                />
-                <Field
-                  component={TextField}
-                  label="Password"
-                  name="password"
-                  type="password"
-                  className=""
-                />
-                <Button 
-                  buttonText="Login"
-                  handleButtonClick={handleClickLogin}
-                  buttonWidth="w-52 md:w-96 lg:w-320"
-                  buttonHeight="h-7 md:h-9"
-                />
-              </Form>
-
+              {({ handleSubmit }) => (
+                <Form className="grid justify-items-center" onSubmit={handleSubmit}>
+                  <Field 
+                    name="email"
+                    as={TextField}
+                    label="Email"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                  />
+                  <ErrorMessage name="email" component="div" className="text-red-500" />
+                  <Field 
+                    name="password"
+                    as={TextField}
+                    label="Password"
+                    type="password"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                  />
+                  <ErrorMessage name="password" component="div" className="text-red-500" />
+                  <a className="font-fira underline justify-self-end text-xs">Forgot Password?</a>
+                  <Button 
+                    handleButtonClick={handleSubmit}
+                    buttonText="Login"
+                    buttonWidth="w-full"
+                    buttonHeight="h-7 md:h-9"
+                  />
+                  <p className="font-fira text-xs">Don&apos;t have an account? <a className="font-fira underline text-xs">Create one</a></p>
+                  <p className="font-fira text-xs">Or continue with</p>
+                  <div className="grid justify-items-center content-center w-32 h-9 border-2 border-black border-solid rounded-md">
+                    <Image
+                      src="/gIcon.svg"
+                      alt="Google icon"
+                      className="flex lg:hidden"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+                </Form>
+              )}
             </Formik>
-            
-            
           </div>
         </div>
             </main>
