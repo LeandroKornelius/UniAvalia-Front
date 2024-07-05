@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-    <Component {...pageProps} />
-    <ToastContainer />
+      <Component {...pageProps} />
+      <ToastContainer />
     </>
   )
 }
