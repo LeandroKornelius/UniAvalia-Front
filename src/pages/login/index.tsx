@@ -104,8 +104,7 @@ export default function Login() {
                   <Button 
                     handleButtonClick={handleSubmit}
                     buttonText="Login"
-                    buttonWidth="w-full"
-                    buttonHeight="h-7 md:h-9"
+                    buttonStyle={"font-fira px-10 py-1 text-white bg-green rounded-md w-full h-7 md:h-9"}
                   />
                   </Form>
               )}

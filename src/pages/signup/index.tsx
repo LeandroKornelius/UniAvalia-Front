@@ -182,8 +182,7 @@ export default function Signup() {
 
                   <Button
                     buttonText="Cadastrar"
-                    buttonWidth="w-full"
-                    buttonHeight="h-7 md:h-9"
+                    buttonStyle={"font-fira px-10 py-1 text-white bg-green rounded-md w-full h-7 md:h-9"}
                     buttonType="submit"
                   />
                   <p className="font-fira text-xs">

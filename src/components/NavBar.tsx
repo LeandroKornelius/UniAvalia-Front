@@ -16,8 +16,7 @@ export default function NavBar({selectedPageText, buttonText, handleButtonClick,
             <Button 
                 buttonText={buttonText}
                 handleButtonClick={handleButtonClick}
-                buttonWidth={buttonWidth}
-                buttonHeight={buttonHeight}
+                buttonStyle={`font-fira px-10 py-1 text-white bg-green rounded-md ${buttonWidth} ${buttonHeight}`}
             />
         </div>
     )
