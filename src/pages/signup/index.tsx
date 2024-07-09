@@ -6,6 +6,7 @@ import { Field, Form, Formik, useFormik } from "formik";
 import { Fira_Mono } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import * as Yup from "yup";
 
 export const metadata: HeadMetaType = {
@@ -42,6 +43,8 @@ const schema = Yup.object({
 });
 
 export default function Signup() {
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -55,6 +58,11 @@ export default function Signup() {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
+  const handleLoginClick = () => {
+    router.push("/login");
+  };
+
   return (
     <>
       <Head>
@@ -65,7 +73,7 @@ export default function Signup() {
       <main className={`${fira_mono.variable}`}>
         <NavBar
           selectedPageText={""}
-          buttonText={"Cadastrar"}
+          buttonText={"Login"}
           buttonWidth={"170"}
         />
         <div className="h-screen w-screen grid content-between lg:h-full p-6 lg:px-24 lg:py-0">
@@ -185,9 +193,10 @@ export default function Signup() {
                     buttonStyle={"font-fira px-10 py-1 text-white bg-green rounded-md w-full h-7 md:h-9"}
                     buttonType="submit"
                   />
-                  <p className="font-fira text-xs">
+                  <p className="cursor-pointer font-fira text-xs">
                     Já possui conta?{" "}
-                    <a className="font-fira underline text-xs">Faça Login</a>
+                    <a className="font-fira underline text-xs"
+                      onClick={handleLoginClick}>Faça Login</a>
                   </p>
                 </Form>
               )}
