@@ -6,6 +6,7 @@ import { Field, Form, Formik } from "formik";
 import { Fira_Mono } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import * as Yup from 'yup';
 
 
@@ -35,9 +36,15 @@ export const metadata: HeadMetaType = {
   });
 
 export default function Login() {
+    const router = useRouter();
+
     const initialValues: LoginFormValues = {
       email: '',
       password: ''
+    }
+
+    const handleCreateClick = () => {
+        router.push("/signup");
     }
     
     return (
@@ -104,14 +111,17 @@ export default function Login() {
                   <Button 
                     handleButtonClick={handleSubmit}
                     buttonText="Login"
-                    buttonWidth="w-full"
-                    buttonHeight="h-7 md:h-9"
+                    buttonStyle={"font-fira px-10 py-1 text-white bg-green rounded-md w-full h-7 md:h-9"}
                   />
                   </Form>
               )}
             </Formik>
                   <div className="grid justify-items-center w-64 space-y-7 ">
-                    <p className="font-fira text-xs">Don&apos;t have an account? <a className="cursor-pointer font-fira underline text-xs">Create one</a></p>
+                    <p className="font-fira text-xs">Don&apos;t have an account? 
+                      <a className="cursor-pointer font-fira underline text-xs"
+                        onClick={handleCreateClick}
+                      >Create one</a>
+                    </p>
                     <Divider className="w-full text-xs">or continue with</Divider>
                     <div className="cursor-pointer grid justify-items-center content-center w-32 h-9 border-2 border-black border-solid rounded-md">
                       <Image

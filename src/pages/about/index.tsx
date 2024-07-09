@@ -73,8 +73,7 @@ export default function About() {
             <Button
               buttonText={"Entrar"}
               handleButtonClick={handleClickLogin}
-              buttonWidth="w-52 md:w-96"
-              buttonHeight="h-7 md:h-9"
+              buttonStyle={"font-fira px-10 py-1 text-white bg-green rounded-md w-52 md:w-96 h-7 md:h-9"}
             />
             <h3 className="font-fira text-sm md:text-base">
               Não tem uma conta?{" "}
