@@ -75,8 +75,8 @@ export default function Login() {
           buttonText={"Cadastrar"}
           buttonWidth={"170"}
         />
-        <div className="h-screen w-screen grid content-between lg:h-full p-6 lg:px-24 lg:py-0">
-          <div className="grid justify-items-center space-y-6 md:space-y-10">
+        <div className="h-screen w-screen flex lg:h-full p-6 lg:px-28 lg:pt-12">
+          <div className="grid justify-items-center px-16 pt-6 md:pt-10 gap-y-6 md:gap-y-10 rounded-l-xl lg:bg-blue/[0.02] w-full lg:w-1/2">
             <Image
               src="/greenLogoText.svg"
               alt="Uniavalia Logo with text"
@@ -130,7 +130,7 @@ export default function Login() {
                   fullWidth
                   id="password"
                   name="password"
-                  label="Password"
+                  label="Senha"
                   type="password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
@@ -152,26 +152,35 @@ export default function Login() {
                 buttonHeight="h-7 md:h-9"
               />
             </form>
-            <div className="grid justify-items-center w-64 space-y-7 ">
+            <div className="grid justify-items-center w-64 gap-y-7 pb-6 md:pb-10">
               <p className="font-fira text-xs">
                 Não possui uma conta?{" "}
                 <a className="cursor-pointer font-fira underline text-xs">
                   Crie agora
                 </a>
               </p>
-              <Divider className="w-full text-xs">
+              <Divider className="w-full text-xs font-fira">
                 ou continue com seu Google
               </Divider>
-              <div className="cursor-pointer grid justify-items-center content-center w-32 h-9 border-2 border-black border-solid rounded-md">
+              <div className="flex justify-center cursor-pointer w-32 h-9 border-2 border-black border-solid rounded-md">
                 <Image
                   src="/gIcon.svg"
                   alt="Google icon"
-                  className="flex lg:hidden"
+                  className="flex"
                   width={24}
                   height={24}
                 />
               </div>
             </div>
+          </div>
+          <div className="flex justify-center w-0 lg:w-1/2 rounded-r-xl bg-[#1DDF8C] ">
+            <Image
+              src="/login-image.svg"
+              alt="Uniavalia Logo with text"
+              className=""
+              width={500}
+              height={500}
+            />
           </div>
         </div>
       </main>
