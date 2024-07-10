@@ -32,19 +32,6 @@ const schema = Yup.object().shape({
   password: Yup.string().required("Required"),
 });
 
-const schema2 = Yup.object().shape({
-  email: Yup.string().email("Invalid email format").required("Required"),
-  password: Yup.string().required("Required"),
-});
-
-/* const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#1DDF8C",
-    },
-  },
-}); */
-
 export default function Login() {
   const initialValues: LoginFormValues = {
     email: "",
@@ -52,11 +39,8 @@ export default function Login() {
   };
 
   const formik = useFormik({
-    initialValues: {
-      email: "foobar@example.com",
-      password: "foobar",
-    },
-    validationSchema: schema2,
+    initialValues: initialValues,
+    validationSchema: schema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
@@ -106,25 +90,6 @@ export default function Login() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
-                  sx={
-                    {
-                      /* "& .MuiOutlinedInput-root": {
-                      color: "#000",
-                      fontFamily: "Arial",
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#1C1C1C80",
-                      },
-                      "&.Mui-focused": {
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          borderColor:
-                            formik.touched.email && Boolean(formik.errors.email)
-                              ? "primary.main"
-                              : "error",
-                        },
-                      },
-                    }, */
-                    }
-                  }
                 />
                 <TextField
                   fullWidth
