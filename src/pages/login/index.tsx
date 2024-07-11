@@ -1,60 +1,66 @@
 import Button from "@/components/Button";
 import NavBar from "@/components/NavBar";
+import muiTheme from "@/styles/muiTheme";
 import { HeadMetaType } from "@/types/headMetaType";
-import { Divider, TextField } from "@mui/material";
-import { Field, Form, Formik } from "formik";
+import { Divider, TextField, ThemeProvider } from "@mui/material";
+import { useFormik } from "formik";
 import { Fira_Mono } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
-import * as Yup from 'yup';
-
+import * as Yup from "yup";
 
 export const metadata: HeadMetaType = {
-    title: "Login",
-    description: "Sign in to UniAvalia and access your account. Join a community dedicated to helping students make informed class selections.",
-  };
+  title: "Login",
+  description:
+    "Sign in to UniAvalia and access your account. Join a community dedicated to helping students make informed class selections.",
+};
 
-  const fira_mono = Fira_Mono({
-    subsets: ["latin"],
-    display: "swap",
-    variable: "--font-fira-mono",
-    weight: "400",
-  });
+const fira_mono = Fira_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-fira-mono",
+  weight: "400",
+});
 
-  interface LoginFormValues {
-    email: string;
-    password: string;
-  }
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
 
-  const schema = Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email format')
-      .required('Required'),
-    password: Yup.string()
-      .required('Required'),
-  });
+const schema = Yup.object().shape({
+  email: Yup.string().email("Invalid email format").required("Required"),
+  password: Yup.string().required("Required"),
+});
 
 export default function Login() {
-    const initialValues: LoginFormValues = {
-      email: '',
-      password: ''
-    }
-    
-    return (
-        <>
-            <Head>
-                <title>{metadata.title}</title>
-                <meta name="description" content={metadata.description} />
-                <link rel="icon" href="/greenLogo.svg" sizes="any" />
-            </Head>
-            <main className={`${fira_mono.variable}`}>
-                <NavBar
-                    selectedPageText={""}
-                    buttonText={"Cadastrar"}
-                    buttonWidth={"170"}
-                />
-                <div className="h-screen w-screen grid content-between lg:h-full p-6 lg:px-24 lg:py-0">
-          <div className="grid justify-items-center space-y-6 md:space-y-10">
+  const initialValues: LoginFormValues = {
+    email: "",
+    password: "",
+  };
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: schema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
+  return (
+    <>
+      <Head>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <link rel="icon" href="/greenLogo.svg" sizes="any" />
+      </Head>
+      <main className={`${fira_mono.variable}`}>
+        <NavBar
+          selectedPageText={""}
+          buttonText={"Cadastrar"}
+          buttonWidth={"170"}
+        />
+        <div className="h-screen w-screen flex lg:h-full p-6 lg:px-28 lg:pt-12">
+          <div className="grid justify-items-center px-16 pt-6 md:pt-10 gap-y-6 md:gap-y-10 rounded-l-xl lg:bg-blue/[0.02] w-full lg:w-1/2">
             <Image
               src="/greenLogoText.svg"
               alt="Uniavalia Logo with text"
@@ -69,63 +75,80 @@ export default function Login() {
               Como você gostaria de realizar o seu login?
             </h2>
 
-            <Formik
-              initialValues={initialValues}
-              validationSchema={schema}
-              onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 400);
-              }}
+            <form
+              onSubmit={formik.handleSubmit}
+              className="grid justify-items-center w-full gap-8"
             >
-              {({ handleSubmit }) => (
-                <Form className="grid justify-items-center" onSubmit={handleSubmit}>
-                  <Field 
-                    name="email"
-                    as={TextField}
-                    label="Email"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                  />
-                  {/* <ErrorMessage name="email" component="div" className="text-red-500" /> */}
-                  <Field 
-                    name="password"
-                    as={TextField}
-                    label="Password"
-                    type="password"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                  />
-                  {/* <ErrorMessage name="password" component="div" className="text-red-500" /> */}
-                  <a className="cursor-pointer font-fira underline justify-self-end text-xs mb-5">Forgot Password?</a>
-                  <Button 
-                    handleButtonClick={handleSubmit}
-                    buttonText="Login"
-                    buttonWidth="w-full"
-                    buttonHeight="h-7 md:h-9"
-                  />
-                  </Form>
-              )}
-            </Formik>
-                  <div className="grid justify-items-center w-64 space-y-7 ">
-                    <p className="font-fira text-xs">Don&apos;t have an account? <a className="cursor-pointer font-fira underline text-xs">Create one</a></p>
-                    <Divider className="w-full text-xs">or continue with</Divider>
-                    <div className="cursor-pointer grid justify-items-center content-center w-32 h-9 border-2 border-black border-solid rounded-md">
-                      <Image
-                        src="/gIcon.svg"
-                        alt="Google icon"
-                        className="flex lg:hidden"
-                        width={24}
-                        height={24}
-                      />
-                    </div>
-                  </div>
+              <ThemeProvider theme={muiTheme}>
+                <TextField
+                  fullWidth
+                  id="email"
+                  name="email"
+                  label="Email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                />
+                <TextField
+                  fullWidth
+                  id="password"
+                  name="password"
+                  label="Senha"
+                  type="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
+                />
+              </ThemeProvider>
+
+              <a className="cursor-pointer font-fira underline justify-self-end text-xs mb-5">
+                Esqueceu sua senha?
+              </a>
+              <Button
+                handleButtonClick={formik.handleSubmit}
+                buttonText="Login"
+                buttonWidth="w-full"
+                buttonHeight="h-7 md:h-9"
+              />
+            </form>
+            <div className="grid justify-items-center w-64 gap-y-7 pb-6 md:pb-10">
+              <p className="font-fira text-xs">
+                Não possui uma conta?{" "}
+                <a className="cursor-pointer font-fira underline text-xs">
+                  Crie agora
+                </a>
+              </p>
+              <Divider className="w-full text-xs font-fira">
+                ou continue com seu Google
+              </Divider>
+              <div className="flex justify-center cursor-pointer w-32 h-9 border-2 border-black border-solid rounded-md">
+                <Image
+                  src="/gIcon.svg"
+                  alt="Google icon"
+                  className="flex"
+                  width={24}
+                  height={24}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center w-0 lg:w-1/2 rounded-r-xl bg-[#1DDF8C] ">
+            <Image
+              src="/login-image.svg"
+              alt="Uniavalia Logo with text"
+              className=""
+              width={500}
+              height={500}
+            />
           </div>
         </div>
-            </main>
-        </>
-    )
+      </main>
+    </>
+  );
 }
