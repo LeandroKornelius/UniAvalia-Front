@@ -2,7 +2,7 @@ export default function Button({
   buttonText,
   handleButtonClick,
   buttonType,
-  buttonStyle
+  buttonStyle,
 }: {
   buttonText: string;
   handleButtonClick?: () => void;
