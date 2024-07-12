@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { Fira_Mono } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import * as Yup from "yup";
 
 export const metadata: HeadMetaType = {
@@ -33,6 +34,8 @@ const schema = Yup.object().shape({
 });
 
 export default function Login() {
+  const router = useRouter();
+
   const initialValues: LoginFormValues = {
     email: "",
     password: "",
@@ -45,6 +48,10 @@ export default function Login() {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
+  const handleCreateClick = () => {
+    router.push("/signup");
+  };
 
   return (
     <>
@@ -111,16 +118,21 @@ export default function Login() {
                 Esqueceu sua senha?
               </a>
               <Button
+                buttonText="Cadastrar"
+                buttonStyle={
+                  "font-fira px-10 py-1 text-white bg-green rounded-md w-full h-7 md:h-9"
+                }
+                buttonType="submit"
                 handleButtonClick={formik.handleSubmit}
-                buttonText="Login"
-                buttonWidth="w-full"
-                buttonHeight="h-7 md:h-9"
               />
             </form>
             <div className="grid justify-items-center w-64 gap-y-7 pb-6 md:pb-10">
               <p className="font-fira text-xs">
                 Não possui uma conta?{" "}
-                <a className="cursor-pointer font-fira underline text-xs">
+                <a
+                  className="cursor-pointer font-fira underline text-xs"
+                  onClick={handleCreateClick}
+                >
                   Crie agora
                 </a>
               </p>

@@ -1,19 +1,22 @@
 export default function Button({
   buttonText,
   handleButtonClick,
-  buttonWidth,
-  buttonHeight,
+  buttonType,
+  buttonStyle,
 }: {
   buttonText: string;
   handleButtonClick?: () => void;
   buttonWidth?: string;
   buttonHeight?: string;
+  buttonType?: "button" | "submit" | "reset" | undefined;
+  buttonStyle: string;
 }) {
-  const buttonStyle = `font-fira font-semibold inline-flex justify-center items-center px-10 py-5 text-black bg-green rounded-md ${
-    buttonWidth || "w-52"
-  } ${buttonHeight || "h-7"}`;
   return (
-    <button className={buttonStyle} type="button" onClick={handleButtonClick}>
+    <button
+      className={buttonStyle}
+      type={buttonType}
+      onClick={handleButtonClick}
+    >
       {buttonText}
     </button>
   );
